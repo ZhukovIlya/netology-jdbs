@@ -1,6 +1,7 @@
 package ru.netology.jdbs.repository;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Map;
+
 import java.util.stream.Collectors;
 
 @Repository
@@ -32,6 +33,6 @@ public class JdRepository {
     }
 
     public List<String> getProductName(String name) {
-        return namedParameterJdbcTemplate.queryForList(sqlText, Map.of("name", name), String.class);
+        return namedParameterJdbcTemplate.queryForList(sqlText, new MapSqlParameterSource("name", name), String.class);
     }
 }
